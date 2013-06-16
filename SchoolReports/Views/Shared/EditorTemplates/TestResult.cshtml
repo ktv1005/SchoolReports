@@ -1,0 +1,48 @@
+﻿@model SchoolReports.Models.TestResult
+@{ 
+    bool showExtraOptions = 
+        (SchoolReports.Models.ReportTypes)ViewBag.ReportType == SchoolReports.Models.ReportTypes.Swim ||
+        !string.IsNullOrWhiteSpace(Model.Subject);
+}
+
+<div class="testResult">
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.ShowWasAbsent)
+    @Html.HiddenFor(model => model.Subject)
+    @Html.HiddenFor(model => model.Theme)
+
+    <h2 class="subject">@Html.DisplayFor(model => model.Subject)</h2>
+    <h3>@Html.DisplayFor(model => model.Theme)</h3>
+
+    <table style="width: 100%">
+        @Html.EditorFor(model => model.Answers, new { ShowExtraOptions = showExtraOptions })
+        @if (Model.ShowWasAbsent)
+        {
+            <tr>
+                <td style="width: 40px">
+                    @Html.EditorFor(model => model.WasAbsent)
+                </td>
+                <td colspan="3" style="width: 100%">ik was afwezig tijdens de test
+                </td>
+            </tr>
+        }
+    </table>
+
+    @if (showExtraOptions)
+    {
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.ResultText, 3, 80, null)
+        </div>
+    }
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.RemarkText)
+    </div>
+    <div class="editor-field">
+        @Html.TextAreaFor(model => model.RemarkText, 3, 80, null)
+    </div>
+
+    <div class="editor-field">
+        @Html.DropDownListFor(model => model.ChosenSmiley, Model.GetPossibleSmileys())
+    </div>
+</div>

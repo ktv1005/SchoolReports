@@ -1,0 +1,32 @@
+﻿@model IEnumerable<SchoolReports.Models.Student>
+
+@{
+    ViewBag.Title = "Leerlingen";
+}
+
+<h2>Leerlingen</h2>
+
+<p>
+    <a href="@Url.Action("Create")">
+        <img src="~/Images/add.png" alt="Rapport koppelen" title="Rapport koppelen" />
+        Leerling toevoegen
+    </a>
+</p>
+
+<table>
+
+    @foreach (var item in Model.OrderBy(s => s.FullName))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.Id })">
+                    <img src="~/Images/pencil.png" alt="Leerling aanpassen" title="Leerling aanpassen" />
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,1 @@
+﻿UPDATE [dbo].[Tests] SET SHOW = 1 WHERE [Subject] IS NULL

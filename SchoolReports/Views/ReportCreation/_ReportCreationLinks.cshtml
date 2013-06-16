@@ -1,0 +1,20 @@
+﻿@model IEnumerable<SchoolReports.Models.Report>
+
+@{
+    var report = Model.SingleOrDefault(r => r.Level == ViewBag.CurrentLevel &&
+                                            r.PeriodId == ViewBag.CurrentPeriodId &&
+                                            r.ReportType == ViewBag.ReportType);
+}
+
+@if (report == null)
+{ 
+    <a href="@Url.Action("Create", new { level = ViewBag.CurrentLevel, reportType = ViewBag.ReportType, currentPeriodId = ViewBag.CurrentPeriodId })">
+        <img src="~/Images/add.png" alt="Rapport maken" title="Rapport maken" />
+    </a>
+}
+else
+{
+    <a href="@Url.Action("Edit", new { id = report.Id })">
+        <img src="~/Images/pencil.png" alt="Rapport aanpassen" title="Rapport aanpassen" />
+    </a>   
+}

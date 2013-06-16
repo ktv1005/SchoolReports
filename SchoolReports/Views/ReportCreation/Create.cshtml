@@ -1,0 +1,28 @@
+﻿@model SchoolReports.Models.Report
+
+@{
+    ViewBag.Title = "Rapport aanmaken";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Report</legend>
+
+        @Html.EditorForModel()
+
+        <p>
+            <input type="submit" value="Aanmaken" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Annuleren", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

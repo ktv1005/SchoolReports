@@ -1,0 +1,25 @@
+﻿@model SchoolReports.Models.Test
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.ShowWasAbsent)
+@Html.HiddenFor(model => model.Subject)
+
+<h2>@Html.DisplayFor(model => model.Subject)</h2>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Show)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Show)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Theme)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Theme)
+</div>
+
+<h3>Accenten</h3>
+
+@Html.EditorFor(model => model.Questions)

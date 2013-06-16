@@ -1,0 +1,14 @@
+﻿@model SchoolReports.Models.Report
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.PeriodId)
+@Html.HiddenFor(model => model.ReportType)
+@Html.HiddenFor(model => model.Level)
+
+<div>
+    De leerlingen van het <b>@Model.Level</b>e leerjaar
+    zullen voor de periode <b>@Model.Period.Name</b>
+    het volgende rapport krijgen:   
+    
+    @Html.EditorFor(model => model.TestGroups) 
+</div>

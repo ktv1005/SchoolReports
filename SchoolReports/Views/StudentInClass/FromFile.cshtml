@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SchoolReports.Models.StudentInClass>
+
+@{
+    ViewBag.Title = "Vanuit bestand";
+}
+
+<h2>Leerlingen aan een klas koppelen vanuit een tekst bestand</h2>
+
+@if (Model == null)
+{
+    <i>Formaat: achternaam (tab) naam (tab) klas (enter)</i>
+
+    using (Html.BeginForm())
+    {
+    <b>Tekst :</b>
+    @Html.TextArea("fileContent")        
+            
+    <input type="submit" value="Verwerken" />    
+    }
+    
+    <div>
+        @Html.ActionLink("Annuleren", "Index")
+    </div>
+}
+else
+{
+    <ul>
+        @foreach (var studentInClass in Model)
+        {
+            <li>@studentInClass.Class.Name - @studentInClass.Student.FullName</li>
+        }
+    </ul>
+    
+    <div>
+        @Html.ActionLink("Terug naar het overzicht", "Index")
+    </div>
+}
+

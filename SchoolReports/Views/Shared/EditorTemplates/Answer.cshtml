@@ -1,0 +1,22 @@
+﻿@model SchoolReports.Models.Answer
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.QuestionText)
+
+<tr>
+    @if ((bool)ViewBag.ShowExtraOptions)
+    {
+        <td>
+            @Html.EditorFor(model => model.Result)
+        </td>
+    }
+    <td style="width: 60%">
+        @Html.DisplayFor(model => model.QuestionText)
+    </td>
+    <td style="width: 10%">
+        @Html.LabelFor(model => model.RemarkText)
+    </td>
+    <td style="width: 30%">
+        @Html.EditorFor(model => model.RemarkText)
+    </td>
+</tr>

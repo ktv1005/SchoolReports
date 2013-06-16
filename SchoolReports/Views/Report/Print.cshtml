@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SchoolReports.Models.StudentInClass>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/print.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/printlinks.css" media="print">
+    <title>Rapporten afdrukken</title>
+</head>
+<body>
+    <div id="links">
+        @Html.ActionLink("Terug naar de lijst", "Index") |
+        <a href="javascript:window.print()">Afdrukken</a>
+    </div>
+
+    @foreach (SchoolReports.Models.StudentInClass studentInClass in Model)
+    {
+        if (ViewBag.ReportType == SchoolReports.Models.ReportTypes.Swim)
+        {
+            Html.RenderPartial("_PrintSwim", studentInClass, new ViewDataDictionary { { "currentPeriod", ViewBag.CurrentPeriod }, { "reportType", ViewBag.ReportType } });
+        }
+        else
+        {
+            Html.RenderPartial("_PrintGym", studentInClass, new ViewDataDictionary { { "currentPeriod", ViewBag.CurrentPeriod }, { "reportType", ViewBag.ReportType } });
+        }
+
+        if (studentInClass != Model.Last())
+        {
+        <p style="page-break-after: right" />
+        }
+    }
+</body>
+</html>

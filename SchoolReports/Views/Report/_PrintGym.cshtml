@@ -1,0 +1,110 @@
+﻿@model SchoolReports.Models.StudentInClass
+
+@{
+    SchoolReports.Models.ReportResult report = Model.GetReportResultForPeriod(ViewBag.CurrentPeriod.Id, ViewBag.ReportType);
+}
+
+<div class="content">
+    <div class="header">
+        <div class="logoGrasmus">
+            <img src="~/Images/Print/grasmus.jpg" />
+            De Grasmus
+        </div>
+        <h1>- Turnrapport -</h1>
+        <div class="logoKlareBron">
+            <img src="~/Images/Print/klarebron.jpg" />
+            De Klare Bron
+        </div>
+    </div>
+    <div class="report">
+        <h1>@Model.Student.FullName</h1>
+        <h2>Leerjaar @Model.Class.Level - Rapport @ViewBag.CurrentPeriod.GetNumberForReportType(ViewBag.ReportType)</h2>
+
+        <table>
+            @foreach (SchoolReports.Models.TestResultGroup testResultGroup in report.TestResultGroups)
+            {     
+                <tr>
+                    <td class="testResultGroupName" colspan="2">@testResultGroup.Name</td>
+                </tr>  
+
+                foreach (SchoolReports.Models.TestResult testResult in testResultGroup.TestResults.Where(t => t.HasResult()))
+                {                         
+                <tr>
+                    <td><b>@testResult.Subject</b>
+                        @if (!string.IsNullOrEmpty(testResult.Theme))
+                        { 
+                            @:- <i>@testResult.Theme</i> 
+                        }
+                    </td>
+                    @if (testResult.ChosenSmiley != SchoolReports.Models.Smiley.None)
+                    {
+                        <td class="smileys">
+                            <img src="~/Images/Print/@testResult.GetSmileyImageFor(SchoolReports.Models.Smiley.VeryGood)" />
+                            <img src="~/Images/Print/@testResult.GetSmileyImageFor(SchoolReports.Models.Smiley.Good)" />
+                            <img src="~/Images/Print/@testResult.GetSmileyImageFor(SchoolReports.Models.Smiley.Sufficient)" />
+                            <img src="~/Images/Print/@testResult.GetSmileyImageFor(SchoolReports.Models.Smiley.Insufficient)" />
+                            <img src="~/Images/Print/@testResult.GetSmileyImageFor(SchoolReports.Models.Smiley.Weak)" />
+                        </td>        
+                    }
+                </tr>
+                    foreach (SchoolReports.Models.Answer answer in testResult.Answers)
+                    { 
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(testResult.Subject))
+                        { 
+                            <img src="@SchoolReports.Models.Answer.GetImageForResult(answer.Result)" />
+                        }
+                        @Html.DisplayFor(model => answer.QuestionText)
+                    </td>
+                    <td class="answerremark">
+                        <div>
+                            @Html.DisplayFor(model => answer.RemarkText)
+                        </div>
+                    </td>
+                </tr>
+                    }
+
+                    if (testResult.WasAbsent)
+                    {
+                <tr>
+                    <td colspan="2">
+                        <img src="@SchoolReports.Models.Answer.GetImageForResult(testResult.WasAbsent)" />
+                        ik was afwezig tijdens de test.
+                    </td>
+                </tr>
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(testResult.ResultText))
+                    {   
+                <tr>
+                    <td colspan="2">
+                        <i>Resultaat:</i> @Html.DisplayFor(model => testResult.ResultText)
+                    </td>
+                </tr>    
+                    }
+
+
+                    if (!string.IsNullOrWhiteSpace(testResult.RemarkText))
+                    {                
+                <tr>
+                    <td colspan="2">
+                        <i>Algemene opmerking:</i> @Html.DisplayFor(model => testResult.RemarkText)
+                    </td>
+                </tr>
+                    }    
+            
+                <tr>
+                    <td>&nbsp
+                    </td>
+                </tr>                
+                }
+            }
+        </table>
+
+        <div class="reporttypeimage">
+            <img src="~/Images/Print/turnen1.jpg" class="firstimage" />
+            <img src="~/Images/Print/turnen2.png" />
+        </div>
+    </div>
+</div>

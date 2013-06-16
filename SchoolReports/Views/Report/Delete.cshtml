@@ -1,0 +1,29 @@
+﻿@model SchoolReports.Models.ReportResult
+
+@{
+    ViewBag.Title = "Rapport verwijderen";
+}
+
+<h2>Verwijderen</h2>
+
+<p>
+    Weet je zeker dat je het 
+    @if (Model.ReportType == SchoolReports.Models.ReportTypes.Swim)
+    { 
+        <b>zwemrapport</b> 
+    }
+    else
+    {
+        <b>turnrapport</b> 
+    } 
+    van <b>@ViewBag.CurrentStudent.Student.FullName</b> 
+    uit <b>@ViewBag.CurrentStudent.Class.Name</b> 
+    voor <b>@ViewBag.CurrentPeriod.Name @ViewBag.CurrentStudent.Year</b> wil verwijderen?
+</p>
+
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Verwijderen" /> |
+        @Html.ActionLink("Annuleren", "Index")
+    </p>
+}

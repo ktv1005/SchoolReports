@@ -1,0 +1,32 @@
+﻿@model SchoolReports.Models.Report
+
+@{
+    ViewBag.Title = "Rapport verwijderen";
+}
+
+<h2>Verwijderen</h2>
+
+<p>
+    Weet je zeker dat je het 
+
+    @if (Model.ReportType == SchoolReports.Models.ReportTypes.Swim)
+    { 
+        <b>zwemrapport</b> 
+    }
+    else
+    {
+        <b>turnrapport</b> 
+    }
+
+    voor leerjaar <b>@Model.Level</b>
+    en voor de periode <b>@Model.Period.Name</b> wil verwijderen?
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        <input type="submit" value="Verwijderen" />
+        |
+        @Html.ActionLink("Annuleren", "Index")
+    </p>
+}

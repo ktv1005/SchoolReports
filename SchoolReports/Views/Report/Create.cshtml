@@ -1,0 +1,31 @@
+﻿@model SchoolReports.Models.ReportResult
+
+@{
+    ViewBag.Title = "Rapport aanmaken";
+}
+
+<h1>@ViewBag.CurrentStudent.Student.FullName - @ViewBag.CurrentStudent.Class.Name</h1>
+<h3>@ViewBag.CurrentPeriod.Name @ViewBag.CurrentStudent.SchoolYear.Name</h3>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    
+    <fieldset>
+        <legend>ReportResult</legend>
+
+        @Html.EditorForModel()
+
+        <p>
+            <input type="submit" value="Aanmaken" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Annuleren", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/bundles/changeresulttext");
+}

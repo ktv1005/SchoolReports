@@ -1,0 +1,34 @@
+﻿@model SchoolReports.Models.StudentInClass
+
+@{
+    ViewBag.Title = "Leerling toevoegen aan klas";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>StudentInClass</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.ClassId)
+        @Html.HiddenFor(model => model.Year)
+
+        <div>
+            De leerling @Html.DropDownList("StudentId", (SelectList)ViewBag.Students)
+            zal in het schooljaar <b>@ViewBag.CurrentSchoolYear.Name</b>
+            in klas <b>@Model.Class.Name</b> zitten.    
+        </div>
+
+        <p>
+            <input type="submit" value="Toevoegen" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Annuleren", "Index")
+</div>

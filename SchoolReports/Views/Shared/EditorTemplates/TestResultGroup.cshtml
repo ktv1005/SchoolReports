@@ -1,0 +1,10 @@
+﻿@model SchoolReports.Models.TestResultGroup
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.Name)
+
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+
+<hr />
+
+@Html.EditorFor(model => model.TestResults, new { ReportType = ViewBag.ReportType })

@@ -1,0 +1,27 @@
+﻿@model SchoolReports.Models.StudentInClass
+
+@{
+    var reports = ((IEnumerable<SchoolReports.Models.Report>)ViewBag.Reports);
+    var report = reports.SingleOrDefault(r => r.Level == Model.Class.Level &&
+                                              r.PeriodId == ViewBag.CurrentPeriodId &&
+                                              r.ReportType == ViewBag.ReportType);
+}
+
+@if (report == null)
+{
+    <img src="~/Images/error.png" alt="Geen rapport gegevens voor deze periode!" title="Geen rapport gegevens voor deze periode!" />
+}
+else if (!Model.HasReportResultForPeriod(ViewBag.CurrentPeriodId, ViewBag.ReportType))
+{ 
+    <a href="@Url.Action("Create", new { studentInClassId = Model.Id, reportType = ViewBag.ReportType, currentPeriodId = ViewBag.CurrentPeriodId })">
+        <img src="~/Images/add.png" alt="Rapport aanmaken" title="Rapport aanmaken" />
+    </a>
+}
+else
+{
+    var reportResult = Model.GetReportResultForPeriod(ViewBag.CurrentPeriodId, ViewBag.ReportType); 
+
+    <a href="@Url.Action("Edit", new { id = reportResult.Id })">
+        <img src="~/Images/pencil.png" alt="Rapport aanpassen" title="Rapport aanpassen" />
+    </a>  
+}

@@ -1,0 +1,13 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Foutje";
+}
+
+<hgroup class="title">
+    <h1 class="error">Foutje.</h1>
+    <h2 class="error">Oeps, er is iets mis gelopen precies.</h2>
+
+    <p>@Model.Exception.ToString()</p>
+    <p>@Model.Exception.StackTrace.ToString()</p>
+</hgroup>

@@ -1,0 +1,37 @@
+﻿@model SchoolReports.Models.Report
+
+@{
+    ViewBag.Title = "Rapport aanpassen";
+}
+
+<h2>Aanpassen</h2>
+
+<div class="float-right">
+    <b>Het rapport verwijderen:</b>
+    <a href="@Url.Action("Delete", new { id = Model.Id })">
+        <img src="~/Images/cross.png" alt="Rapport verwijderen" title="Rapport verwijderen" />
+    </a>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Report</legend>
+
+        @Html.EditorForModel()
+
+        <p>
+            <input type="submit" value="Aanpassen" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Annuleren", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

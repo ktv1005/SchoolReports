@@ -1,0 +1,8 @@
+﻿@model SchoolReports.Models.ReportResult
+
+@Html.HiddenFor(model => model.Id)
+@Html.HiddenFor(model => model.StudentInClassId)
+@Html.HiddenFor(model => model.PeriodId)
+@Html.HiddenFor(model => model.ReportType)
+
+@Html.EditorFor(model => model.TestResultGroups, new { ReportType = Model.ReportType })

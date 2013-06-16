@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SchoolReports.Models.StudentInClass>
+
+@{
+    ViewBag.Title = "Klassen";
+    int currentYear = (int)Session["CurrentYear"];
+}
+
+<h2>Klassen</h2>
+
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <div class="float-right">
+                @Html.ActionLink("Aanmaken vanuit bestand", "FromFile", new { currentYear = currentYear })
+            </div>
+
+            @using (Html.BeginForm())
+            {
+                <b>Schooljaar:</b>
+                @Html.DropDownList("CurrentYear", (SelectList)ViewBag.Years)           
+            
+                <input type="submit" value="Aanpassen" />    
+            }
+        </div>
+    </section>
+}
+
+@foreach (SchoolReports.Models.Class currentClass in ViewBag.Classes)
+{
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 100%">
+                <h2>@currentClass.Name</h2>
+            </td>
+        </tr>
+    </table>
+            
+    <hr />    
+    
+    <table style="width: 100%">
+
+        @foreach (var studentInClass in Model.Where(s => s.Class.Id == currentClass.Id))
+        {
+            <tr>
+                <td style="width: 80%">
+                    @studentInClass.Student.FullName
+                </td>
+            </tr>
+        }
+
+    </table>
+    
+    if (ViewBag.CanAddStudents)
+    {
+    <a href="@Url.Action("Create", new { currentClassId = currentClass.Id, currentYear = currentYear })">
+        <img src="~/Images/add.png" alt="Leerling toevoegen" title="Leerling toevoegen" />
+        Leerling toevoegen
+    </a>
+    }
+}

@@ -1,0 +1,85 @@
+﻿@model SchoolReports.Models.StudentInClass
+
+@{
+    SchoolReports.Models.ReportResult report = Model.GetReportResultForPeriod(ViewBag.CurrentPeriod.Id, ViewBag.ReportType);
+}
+
+<div class="content">
+    <div class="header">
+        <div class="logoGrasmus">
+            <img src="~/Images/Print/grasmus.jpg" />
+            De Grasmus
+        </div>
+        <h1>- Zwemrapport -</h1>
+        <div class="logoKlareBron">
+            <img src="~/Images/Print/klarebron.jpg" />
+            De Klare Bron
+        </div>
+    </div>
+    <div class="report">
+        <h1>@Model.Student.FullName</h1>
+        <h2>Leerjaar @Model.Class.Level - Rapport @ViewBag.CurrentPeriod.GetNumberForReportType(ViewBag.ReportType)</h2>
+
+        @foreach (SchoolReports.Models.TestResultGroup testResultGroup in report.TestResultGroups)
+        {
+            foreach (SchoolReports.Models.TestResult testResult in testResultGroup.TestResults)
+            {                      
+            <table>
+                @foreach (SchoolReports.Models.Answer answer in testResult.Answers)
+                { 
+                    <tr>
+                        <td>
+                            <img src="@SchoolReports.Models.Answer.GetImageForResult(answer.Result)" />
+                            @Html.DisplayFor(model => answer.QuestionText)
+                        </td>
+                        <td class="answerremark">
+                            <div>
+                                @Html.DisplayFor(model => answer.RemarkText)
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+                @if (testResult.WasAbsent)
+                {
+                    <tr>
+                        <td colspan="2">
+                            <img src="@SchoolReports.Models.Answer.GetImageForResult(testResult.WasAbsent)" />
+                            ik was afwezig tijdens de test.
+                        </td>
+                    </tr>
+                }
+            </table>
+                    
+            <div class="smiley">
+                @if (testResult.ChosenSmiley != SchoolReports.Models.Smiley.None)
+                {
+                    <img src="~/Images/Print/@SchoolReports.Models.SmileyOption.GetImageForSmiley(testResult.ChosenSmiley)" />                
+                }
+            </div>
+                        
+            <div class="result">
+
+                @if (!string.IsNullOrWhiteSpace(testResult.ResultText))
+                {   
+                    <div>
+                        <b>Resultaat:</b> @Html.DisplayFor(model => testResult.ResultText)
+                    </div>
+                }
+                @if (!string.IsNullOrWhiteSpace(testResult.RemarkText))
+                {  
+                    <div class="remark">
+                        <b>Algemene opmerking:</b> @Html.DisplayFor(model => testResult.RemarkText)
+                    </div>
+                }
+            </div>   
+                    
+            }
+        }
+
+        <div class="reporttypeimage">
+            <img src="~/Images/Print/zwemmen1.jpg" class="firstimage" />
+            <img src="~/Images/Print/zwemmen2.jpg" />
+        </div>
+    </div>
+</div>

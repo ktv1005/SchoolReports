@@ -1,0 +1,119 @@
+﻿.content {
+    position: relative; 
+    margin: 20px;
+    font-size: 13px;
+}
+
+.header {
+    position: relative; 
+    border-top: 1px solid darkgray;
+    border-bottom: 1px solid darkgray;
+    text-align: center; 
+    height: 100px;
+    color: darkgray;
+}
+
+.header img {
+    display: block;
+    margin: auto;
+}
+
+.header h1 {
+    padding-top: 10px;
+}
+
+.logoGrasmus {    
+    position: absolute;
+    border: 1px dotted darkgray;
+    top: 5px;
+    left: 20px;
+    padding: 10px;
+}
+
+.logoKlareBron {    
+    position: absolute; 
+    border: 1px dotted darkgray;
+    top: 5px;
+    right: 20px;
+    padding: 10px;
+}
+
+.report h1 {
+    text-align: center; 
+}
+
+.report h2 {
+    text-align: center; 
+    color: darkgray;
+    margin-top: -20px;
+}
+
+.report table {
+    margin: auto;
+    margin-bottom: 40px;
+    width: 100%;
+}
+
+.report div {
+    text-align: center;
+}
+
+.testResultGroupName {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.answerremark div {
+    margin-left: auto;
+    width: 250px;
+    min-height: 20px;
+    border: 1px solid lightgray; 
+    padding-left: 10px; 
+    padding-right: 10px; 
+    color: gray;
+    text-align: left;
+}
+
+.result {
+    width: 600px;
+    margin: auto;
+}
+
+.result div {
+    text-align: left;
+}
+
+.result .remark {
+    margin-top: 40px;
+}
+
+.smiley {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.smileylegend {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.smileylegend table {
+    font-style: italic;
+}
+
+.smileylegend table td {
+    width: 100px;
+}
+
+.smileys {
+    text-align: right;
+}
+
+.reporttypeimage {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.firstimage {
+    margin-right: 250px;
+}
